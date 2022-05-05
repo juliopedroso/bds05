@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -19,6 +20,7 @@ public class Genre implements Serializable {
     private Long id;
     private String name;
 
+    @OneToMany(mappedBy = "genre")
     private List<Movie> movies = new ArrayList<>();
 
 

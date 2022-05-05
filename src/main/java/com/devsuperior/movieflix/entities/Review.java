@@ -1,20 +1,30 @@
 package com.devsuperior.movieflix.entities;
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "tb_review")
-public class Review {
+public class Review  implements Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String text;
+    
+    @ManyToOne
+    @JoinColumn (name = "movie_id")
     private Movie movie;
+
+    @ManyToOne
+    @JoinColumn (name = "user_id")
     private User user;
 
     public Review() {
