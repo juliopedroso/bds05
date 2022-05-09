@@ -14,6 +14,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class UserService  implements UserDetailsService {
@@ -22,7 +23,10 @@ public class UserService  implements UserDetailsService {
 
     @Autowired
     private UserRepository repository;
+    @Autowired
+    private AuthService authService;
 
+    @Transactional(readOnly = true)
     public List<UserDTO> findAll() {
         List<User> users =  repository.findAll();
 
@@ -39,6 +43,12 @@ public class UserService  implements UserDetailsService {
         }
         logger.info("User found: {}" , username);
         return user;
+    }
+
+    @Transactional(readOnly = true)
+    public UserDTO getProfile() {
+        User user = authService.authenticated();
+        return new UserDTO(user);
     }
 
 

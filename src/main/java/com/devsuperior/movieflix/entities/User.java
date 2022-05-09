@@ -34,12 +34,10 @@ public class User implements UserDetails {
     private String password;
 
     @OneToMany(mappedBy = "user")
-    private List<Review> reviews = new ArrayList<>(); 
-    
+    private List<Review> reviews = new ArrayList<>();
+
     @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name="tb_user_role",
-        joinColumns = @JoinColumn(name = "user_id"),
-        inverseJoinColumns = @JoinColumn(name = "role_id"))
+    @JoinTable(name = "tb_user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
 
     public User() {
@@ -121,4 +119,5 @@ public class User implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+
 }

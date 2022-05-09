@@ -25,4 +25,12 @@ public class UserController {
         return ResponseEntity.ok().body(users);
     }
 
+
+    @GetMapping("/profile")
+    public ResponseEntity<UserDTO> getProfile(){
+        UserDTO dto = service.getProfile();
+
+        return ResponseEntity.ok().body(dto);
+    }
+
 }

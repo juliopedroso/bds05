@@ -22,7 +22,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
     private  JwtTokenStore tokenStore;
 
     private static final String[] PUBLIC = {"/oauth/token","/h2-console/**"};
-    private static final String[] ENDPOINTS = {"/users/**"};
+    
 
     @Override
     public void configure(ResourceServerSecurityConfigurer resources) throws Exception {
@@ -38,8 +38,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 
         http.authorizeRequests()
         .antMatchers(PUBLIC).permitAll()
-        .antMatchers(ENDPOINTS).permitAll()
-        .anyRequest().hasAnyRole("ADMIN");
+        .anyRequest().authenticated();
 
     }
 
